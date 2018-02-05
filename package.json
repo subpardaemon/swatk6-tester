@@ -1,0 +1,24 @@
+{
+  "name": "@swatk6/tester",
+  "version": "1.0.0",
+  "description": "A lightweight testing package using the assumptions (expected vs actual) model.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/subpardaemon/swatk6-tester.git",
+    "web": "https://github.com/subpardaemon/swatk6-tester/tree/master"
+  },
+  "keywords": [
+    "testing",
+    "developer",
+    "assumptions"
+  ],
+  "author": "Andras Kemeny <subpardaemon@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/subpardaemon/swatk6-tester/issues"
+  }
+}
