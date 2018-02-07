@@ -36,10 +36,20 @@ For a detailed example, see test.js in this package.
 
 Constructor.
 
+`addRequirement(expected[,label])`
+- **expected** `<*>`: the result we expected from that operation; only strict equality will pass
+- **label** `<String>`: optional label, defaults to 'response #NN', where NN is the current index of the test items
+- returns an empty response slot ID that will have to be filled with `addResponseValue()`
+
 `addResponse(result[,expected[,label])`
 - **result** `<*>`: the actual result we got from an operation
 - **expected** `<*>`: the result we expected from that operation; only strict equality will pass; optional, defaults to 'N/A'
 - **label** `<String>`: optional label, defaults to 'response #NN', where NN is the current index of the test items
+- returns the tester object itself, allowing for chaining
+
+`addResponseValue(result,slotID)`
+- **result** `<*>`: the actual result we got from an operation
+- **slotID** `<Number>`: the slot where we need to store this response, received from an earler `addRequirement()` call
 - returns the tester object itself, allowing for chaining
 
 `blockSync(msecs)`

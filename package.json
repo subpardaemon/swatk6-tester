@@ -1,6 +1,6 @@
 {
   "name": "@swatk6/tester",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A lightweight testing package using the assumptions (expected vs actual) model.",
   "main": "index.js",
   "scripts": {

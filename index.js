@@ -63,6 +63,21 @@ swatk6_tester.prototype.getReport = function() {
     return this._report;
 };
 /**
+ * Add a "template" requirement, and return the index where the actual response value should end up with addResponseValue().
+ * @param {*} expects expected value (might be overridden by the .matchResponses() call)
+ * @param {String} [desc='response #NN']
+ * @returns {Number}
+ */
+swatk6_tester.prototype.addRequirement = function(expects,desc) {
+    if (typeof desc==='undefined') {
+	desc = 'response #'+this.responses.length.toString();
+    }
+    this.responses.push(null);
+    this.expected.push(expects);
+    this.descs.push(desc);
+    return this.responses.length-1;
+};
+/**
  * Add a response.
  * @param {*} resp the response we've got
  * @param {*} [expects='N/A'] expected value (might be overridden by the .matchResponses() call)
@@ -82,6 +97,18 @@ swatk6_tester.prototype.addResponse = function(resp,expects,desc) {
     return this;
 };
 /**
+ * Add a response value at a specified response slot.
+ * @param {*} resp the response we've got
+ * @param {Number} where a response slot number we've received from addRequirement()
+ * @returns {swatk6_tester}
+ */
+swatk6_tester.prototype.addResponseValue = function(resp,where) {
+    if (typeof this.responses[where]!=='undefined') {
+	this.responses[where] = resp;
+    }
+    return this;
+};
+/**
  * Match the responses.
  * @param {Array} [expected=this.expected] either leave it out, or provide a full expected response set
  * @returns {Boolean}
@@ -98,6 +125,9 @@ swatk6_tester.prototype.matchResponses = function(expected) {
 	return true;
     }
     for(var i=this._lastindex;i<expected.length;i++) {
+	if (this.expected[i]!==expected[i]) {
+	    this.expected[i] = expected[i];
+	}
 	if (typeof this.responses[i]==='undefined') {
 	    this._report.push({step:i,type:'mismatch_missing',expects:expected[i],actual:undefined,label:this.descs[i]});
 	    ++errnum;
